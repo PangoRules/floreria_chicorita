@@ -1,0 +1,23 @@
+.header{
+	background-color: #f9d5e5;
+	background-attachment: fixed;
+}
+
+.header-container, .auth-btn{
+	display: inline-block;
+	padding: 5px;
+	border: 1px solid blue; 
+}
+
+.auth-btn{
+	float: right;
+}
+
+h1{
+	margin-left: 60px;
+}
+
+button{
+	margin-bottom: 20px;
+	float: right;
+}
