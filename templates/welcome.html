@@ -1,25 +1,18 @@
-<!DOCTYPE html>
+{%extends "base.html"%}
 {% load static %}
-<html lang="es">
-<head>
-	<meta charset="utf-8">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="{% static "css/welcome.css" %}">
-	<title>Florería Chicorita</title>
-</head>
-<body>
-	<div class="header">
-		<span class="header-container"><img src="{% static "img/LogoChicorita.png" %}" alt="Florería Chicorita Logo" height="200" width="400"></span>
-		<span class="header-container"><h1>Flores para todas las ocaciones que a tu corazon emocionen</h1></span>
-		<div class="auth-btn">
-			<button>Registrarse</button>
-			<br>
-			<button>Iniciar Sesión</button>
-		</div>
-	</div>
 
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body>
-</html>
+{%block contenido-head%}
+	<link rel="stylesheet" type="text/css" href="{% static "css/welcome.css" %}">
+	<link rel="stylesheet" href="{% static "css/fontello.css" %}">
+	<title>Florería Chicorita</title>
+{%endblock%}
+
+{%block contenido-body%}
+	<div class="container">
+		<h1 class="icon-cart">Chicorita's Flowers</h1>
+		<input type="checkbox" id="menu-bar">
+		<label class="icon-menu" for="menu-bar"></label>	
+	</div>
+	
+
+{%endblock%}
