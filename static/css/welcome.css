@@ -1,4 +1,43 @@
-* {
-	padding: 0;
-	margin: 0;
+#menu-bar{
+	display: none;
+}
+
+#menu-bar:checked ~ .menu{
+	transform: translateX(0%);
+}
+
+header label{
+	float: right;
+	font-size: 28px;
+	margin: 14px 0;
+	cursor: pointer;
+}
+
+.menu{
+	position: absolute;
+	top: 80px;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	background: rgba(194, 15, 12,0.9);
+	transform: translateX(-100%);
+}
+
+.menu a{
+	display: block;
+	color: #fff;
+	height: 50px;
+	text-decoration: none;
+	padding: 10px;
+	padding-left: 30px;
+	border-bottom: 1px solid rgba(255,255,255,0.5);
+}
+
+.menu a:hover{
+	background: rgba(255,255,255,0.3);
+}
+
+
+header .container{
+	display: table;
 }

@@ -1,0 +1,35 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+header{
+	width: 100%;
+	height: 80px;
+	background: #7F0E0B;
+	color: #fff;
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 100;
+}
+
+.container{
+	width: 98%;
+	margin: auto;
+}
+
+.container img{
+	margin-right: 20px;
+}
+
+h1{
+	float: left;
+}
+
+section{
+	width: 100%;
+	margin-bottom: 50px;
+}

@@ -2,17 +2,42 @@
 {% load static %}
 
 {%block contenido-head%}
-	<link rel="stylesheet" type="text/css" href="{% static "css/welcome.css" %}">
+	<link rel="stylesheet" href="{% static "css/welcome.css" %}">
 	<link rel="stylesheet" href="{% static "css/fontello.css" %}">
+	<link rel="stylesheet" href="{% static "css/banner.css" %}">
 	<title>Florería Chicorita</title>
 {%endblock%}
 
 {%block contenido-body%}
-	<div class="container">
-		<h1 class="icon-cart">Chicorita's Flowers</h1>
-		<input type="checkbox" id="menu-bar">
-		<label class="icon-menu" for="menu-bar"></label>	
-	</div>
+	<header>
+		<div class="container">
+			<h1><img src="{% static "img/LogoChicorita.png" %}" alt="LogoChicorita"> Chicorita</h1>
+			<input type="checkbox" id="menu-bar">
+			<label class="icon-menu" for="menu-bar"></label>	
+			<nav class="menu">
+				<a href="">Iniciar Sesión</a>
+				<a href="">Ver flores</a>
+				<a href="">Contacto</a>
+			</nav>
+		</div>
+	</header>	
 	
+	<main>
+		<section id="banner">
+			<img src="{% static "img/banner.jpg" %}" alt="Imagen del banner">
+			<div class="container">
+				<h2>Flores para alegrar el corazon en cualquier ocasión</h2>
+				<p>¿Encontrará algo de su agrado?</p>
+				<a href="#">Leer más</a>
+			</div>
+			
+		</section>
 
+		<section id="Bienvenidos">
+			<h2>BIENVENIDOS A NUESTRA FLORERIA</h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum dolor voluptate eligendi, illum harum excepturi mollitia esse? Pariatur a ab recusandae officiis. Reprehenderit consequuntur itaque perspiciatis earum possimus cumque quos.</p>
+		</section>
+
+		
+	</main>
 {%endblock%}
