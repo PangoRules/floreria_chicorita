@@ -1,0 +1,8 @@
+{% load static %}
+hola
+{{user.is_superuser}}
+{%if user.is_authenticated%}
+	Si jalo
+		{{user.username}}
+	<span-><a href="{% url 'logout' %}">Logout</a></span->
+{%endif%}

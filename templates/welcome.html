@@ -2,29 +2,19 @@
 {% load static %}
 
 {%block contenido-head%}
-	<link rel="stylesheet" href="{% static "css/welcome.css" %}">
+	<link rel="stylesheet" href="{% static "css/welcome/welcome.css" %}">
 	<link rel="stylesheet" href="{% static "css/fontello.css" %}">
-	<link rel="stylesheet" href="{% static "css/banner.css" %}">
+	<link rel="stylesheet" href="{% static "css/welcome/banner.css" %}">
+	<link rel="stylesheet" href="{% static "css/welcome/arreglosBuscados.css" %}">
+	<link rel="stylesheet" href="{% static "css/welcome/creadores.css" %}">
 	<title>Florería Chicorita</title>
 {%endblock%}
 
 {%block contenido-body%}
-	<header>
-		<div class="container">
-			<h1><img src="{% static "img/LogoChicorita.png" %}" alt="LogoChicorita"> Chicorita</h1>
-			<input type="checkbox" id="menu-bar">
-			<label class="icon-menu" for="menu-bar"></label>	
-			<nav class="menu">
-				<a href="">Iniciar Sesión</a>
-				<a href="">Ver flores</a>
-				<a href="">Contacto</a>
-			</nav>
-		</div>
-	</header>	
 	
 	<main>
 		<section id="banner">
-			<img src="{% static "img/banner.jpg" %}" alt="Imagen del banner">
+			<img src="{% static "img/welcome/banner.jpg" %}" alt="Imagen del banner">
 			<div class="container">
 				<h2>Flores para alegrar el corazon en cualquier ocasión</h2>
 				<p>¿Encontrará algo de su agrado?</p>
@@ -33,11 +23,53 @@
 			
 		</section>
 
-		<section id="Bienvenidos">
+		<section id="bienvenidos">
 			<h2>BIENVENIDOS A NUESTRA FLORERIA</h2>
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum dolor voluptate eligendi, illum harum excepturi mollitia esse? Pariatur a ab recusandae officiis. Reprehenderit consequuntur itaque perspiciatis earum possimus cumque quos.</p>
 		</section>
 
-		
+		<section id="arreglos">
+			<h3>Arreglos más buscados</h3>
+			<div class="container">
+				<article>
+					<img src="{% static "img/arreglos/coloresVinos.jpg" %}" alt="Ramo de flores color vino">
+					<h4>Lorem ipsum dolor sit amet.</h4>
+				</article>
+				<article>
+					<img src="{% static "img/arreglos/florPerritoFelizFeliz.jpg" %}" alt="Arreglo de cumpleaños">
+					<h4>Lorem ipsum dolor sit amet.</h4>
+				</article>
+				<article>
+					<img src="{% static "img/arreglos/margaritasDiadeCampo.jpg" %}" alt="Arreglo de flores margaritas">
+					<h4>Lorem ipsum dolor sit amet.</h4>
+				</article>
+				<article>
+					<img src="{% static "img/arreglos/tulipanesRomance.jpg" %}" alt="Arreglo de tulipanes">
+					<h4>Lorem ipsum dolor sit amet.</h4>
+				</article>
+			</div>
+		</section>
+
+		<section id="creadores">
+			<h3>Creadores de la página</h3>
+			<div class="container">
+				<div class="creadores-info">
+					<img src="{% static "img/creadores/pango.jpg" %}" alt="Creador de la pagina 1">
+					<h4>Rafael Bolaños</h4>
+				</div>
+				<div class="creadores-info">
+					<img src="{% static "img/creadores/ricardo.jpg" %}" alt="Creador de la pagina 2">
+					<h4>Ricardo González</h4>
+				</div>
+				<div class="creadores-info">
+					<img src="{% static "img/creadores/esmeralda.jpg" %}" alt="Creador de la pagina 3">
+					<h4>Esmeralda Montejo</h4>
+				</div>	
+			</div>
+		</section>
 	</main>
+
+	<footer>
+			<p class="copy">Florería Chicorita &copy; 2020</p>
+	</footer>
 {%endblock%}

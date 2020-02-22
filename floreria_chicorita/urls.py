@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from floreria_chicorita.views import Welcome
+from floreria_chicorita.views import *
 
 urlpatterns = [
-	path('', Welcome,name="welcome"),
+	path('/', Welcome,name="welcome"),
+	path('pruebas/', pruebas,name="pruebas"),
     path('admin/', admin.site.urls),
+    path('', include("users.urls")),
 ]

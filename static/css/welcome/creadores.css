@@ -1,0 +1,27 @@
+#creadores{
+	background: rgba(188,65,67,0.8);
+	color: #fff;
+	text-align: center;
+	padding: 20px;
+}
+
+#creadores .container{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.creadores-info {
+	margin: 20px;
+}
+
+.creadores-info img{
+	width: 180px;
+	height: 180px;
+	border-radius: 50%;
+	border: 7px solid #fff;
+}
+
+footer p{
+	text-align: center;
+}
