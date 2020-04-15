@@ -18,34 +18,33 @@
 			<div class="container">
 				<h2>Flores para alegrar el corazon en cualquier ocasión</h2>
 				<p>¿Encontrará algo de su agrado?</p>
-				<a href="#">Leer más</a>
+				<input type="button" onClick="document.getElementById('footer').scrollIntoView();" value="Leer más" />
 			</div>
 			
 		</section>
 
 		<section id="bienvenidos">
 			<h2>BIENVENIDOS A NUESTRA FLORERIA</h2>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum dolor voluptate eligendi, illum harum excepturi mollitia esse? Pariatur a ab recusandae officiis. Reprehenderit consequuntur itaque perspiciatis earum possimus cumque quos.</p>
 		</section>
 
 		<section id="arreglos">
 			<h3>Arreglos más buscados</h3>
 			<div class="container">
 				<article>
-					<img src="{% static "img/arreglos/coloresVinos.jpg" %}" alt="Ramo de flores color vino">
-					<h4>Lorem ipsum dolor sit amet.</h4>
+					<a href="{% url 'pruebas' %}"><img src="{% static "img/arreglos/coloresVinos.jpg" %}" alt="Ramo de flores color vino"></a>
+					<h4>Ramo de flores color vino.</h4>
 				</article>
 				<article>
-					<img src="{% static "img/arreglos/florPerritoFelizFeliz.jpg" %}" alt="Arreglo de cumpleaños">
-					<h4>Lorem ipsum dolor sit amet.</h4>
+					<a href="{% url 'pruebas' %}"><img src="{% static "img/arreglos/florPerritoFelizFeliz.jpg" %}" alt="Arreglo de cumpleaños"></a>
+					<h4>Arreglo de cumpleaños.</h4>
 				</article>
 				<article>
-					<img src="{% static "img/arreglos/margaritasDiadeCampo.jpg" %}" alt="Arreglo de flores margaritas">
-					<h4>Lorem ipsum dolor sit amet.</h4>
+					<a href="{% url 'pruebas' %}"><img src="{% static "img/arreglos/margaritasDiadeCampo.jpg" %}" alt="Arreglo de flores margaritas"></a>
+					<h4>Arreglo de flores margaritas.</h4>
 				</article>
 				<article>
-					<img src="{% static "img/arreglos/tulipanesRomance.jpg" %}" alt="Arreglo de tulipanes">
-					<h4>Lorem ipsum dolor sit amet.</h4>
+					<a href="{% url 'pruebas' %}"><img src="{% static "img/arreglos/tulipanesRomance.jpg" %}" alt="Arreglo de tulipanes"></a>
+					<h4>Arreglo de tulipanes.</h4>
 				</article>
 			</div>
 		</section>
@@ -68,8 +67,8 @@
 			</div>
 		</section>
 	</main>
-
-	<footer>
+	<footer id="footer">
+			<p>Todos los diseños son elaborados en el momento con flores frescas y de la más alta calidad, las variaciones en los diseños son algo inevitable, siendo imposible igualar un diseño al 100% por ser un producto natural. Los arreglos florales pueden variar en forma y diseño, dependiendo de la disponibilidad de flores según temporada o bases según existencias. Sin embargo, en el supuesto caso que su arreglo sea sujeto a sufrir algún cambio que afecte el diseño original solicitado, Florería Chikorita se compromete a hacerlo previa información y autorización del cliente (con conocimiento del mismo). Siendo estas variaciones ligeras , usando flores de valor equivalente, teniendo cuidado de mantener el esquema de estilo, y tema del arreglo, pero sobre todo siempre en beneficio del cliente. Las imágenes mostradas en los accesorios de los productos son puramente de cáracter ilustrativo y pueden variar en cuanto a forma y color.</p>
 			<p class="copy">Florería Chicorita &copy; 2020</p>
 	</footer>
 {%endblock%}

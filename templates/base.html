@@ -16,14 +16,21 @@
 <body>
 	<header>
 		<div class="container">
-			<h1><a href="{% url 'welcome' %}"><img src="{% static "img/LogoChicorita.png" %}" alt="LogoChicorita"></a> Chicorita</h1>
+			<h1><a href="{% url 'welcome' %}"><img src="{% static "img/LogoChicorita.png" %}" alt="LogoChicorita"></a> Chikorita</h1>
 			<input type="checkbox" id="menu-bar">
 			<label class="icon-menu" for="menu-bar"></label>	
 			<nav class="menu" id="nav">
-				<a href="{% url 'login' %}">Entrar</a>
-				<a href="{% url 'register' %}">Registrarse</a>
-				<a href="">Ver flores</a>
-				<a href="">Contacto</a>
+				{%if user.is_authenticated%}
+					<a href="{% url 'dashboard' %}">Dashboard</a>
+					<a href="{% url 'logout' %}">Cerrar Sesión</a>
+					<a href="">Ver flores</a>
+					<a href="">Contacto</a>
+				{%else%}
+					<a href="{% url 'login' %}">Entrar</a>
+					<a href="{% url 'register' %}">Registrarse</a>
+					<a href="">Ver flores</a>
+					<a href="">Contacto</a>
+				{%endif%}
 			</nav>
 		</div>
 	</header>

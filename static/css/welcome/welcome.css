@@ -8,8 +8,8 @@
 
 header label{
 	float: right;
-	font-size: 28px;
-	margin: 14px 0;
+	font-size: 20px;
+	margin: 20px 0;
 	cursor: pointer;
 }
 
@@ -21,7 +21,7 @@ header label{
 	height: 100vh;
 	background: rgba(194, 15, 12,0.9);
 	transform: translateX(-100%);
-	transition: left 2s;
+	transition: all .5s!IMPORTANT;
 }
 
 .menu a{
@@ -45,4 +45,9 @@ header .container{
 
 body{
 	background: #fff;
+}
+
+header h1{
+	font-size: 30px;
+	margin-top: 20px;
 }

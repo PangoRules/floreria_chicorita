@@ -1,8 +1,38 @@
+{%extends "base.html"%}
 {% load static %}
-hola
-{{user.is_superuser}}
-{%if user.is_authenticated%}
-	Si jalo
-		{{user.username}}
-	<span-><a href="{% url 'logout' %}">Logout</a></span->
-{%endif%}
+
+{%block contenido-head%}
+<link rel="stylesheet" href="{% static "css/users/dashboard.css" %}">
+<title>Dashboard</title>
+{%endblock%}
+
+{%block contenido-body%}
+	<div class="main">
+		<div class="cabecera contenedor">
+			<h2>DASHBOARD DE {{user.username}}</h2>
+		</div>
+
+		<section class="contenedor">
+			<h3>PEDIDOS</h3>
+			<table class="table">
+		      <thead>
+		        <tr>
+		          <th>#</th>
+		          <th>Producto</th>
+		          <th>Fecha de la compra</th>
+		        </tr>
+		      </thead>
+		      <tbody>
+		      	{% for compra in compras %}
+		        <tr class="tablarows">
+		          <td>{{compra.id}}</td>
+		          <td>{{compra.producto}}</td>
+		          <td>{{compra.fecha}}</td>
+		        </tr>
+		        {% endfor %}
+		      </tbody>
+		    </table>
+			</div>
+		</section>
+	</div>
+{% endblock %}

@@ -5,13 +5,15 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponse
 from .forms import CreateUserForm
+from .models import Inventario, Compra
 
 # Create your views here.
 
 @login_required(login_url='login')
 def dashboard(request):
 	if request.user.is_authenticated:
-		return render(request,"users/dashboard.html")
+		pedidos = Compra.objects.filter(user=request.user).order_by('fecha')
+		return render(request,"users/dashboard.html",{'compras':pedidos})
 	return redirect('/login')
 
 def register(request):
