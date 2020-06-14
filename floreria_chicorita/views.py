@@ -7,3 +7,6 @@ def Welcome(request):
 
 def pruebas(request):
 	return render(request,"pruebas.html")
+
+def verflores(request):
+	return render(request,"verflores.html")

@@ -19,6 +19,7 @@ from floreria_chicorita.views import *
 
 urlpatterns = [
 	path('', Welcome,name="welcome"),
+    path('verflores/', verflores, name="verFlores"),
 	path('pruebas/', pruebas,name="pruebas"),
     path('admin/', admin.site.urls),
     path('', include("users.urls")),
