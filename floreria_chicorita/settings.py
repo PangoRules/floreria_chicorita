@@ -27,7 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '516c1281.ngrok.io',
-    '127.0.0.1'   
+    '127.0.0.1',
+    'pangoruleshere.pythonanywhere.com'   
 ]
 
 
