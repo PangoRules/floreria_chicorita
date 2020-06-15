@@ -31,20 +31,40 @@
 			<h3>Arreglos más buscados</h3>
 			<div class="container">
 				<article>
-					<a href="{% url 'pruebas' %}"><img src="{% static "img/arreglos/coloresVinos.jpg" %}" alt="Ramo de flores color vino"></a>
-					<h4>Ramo de flores color vino.</h4>
+					{% if user.is_authenticated %}
+						<a href="#" data-toggle="modal" data-idArreglo="6" data-precio="520" data-nombreFlor="Centro de Mesa Vino" data-target="#modalAgregarCarrito"><img src="{% static "img/arreglos/coloresVinos.jpg" %}" alt="Ramo de flores color vino"></a>
+						<h4>Ramo de flores color vino.</h4>
+					{% else %}
+						<a href="#" data-toggle="modal" data-target="#modalIniciaSesion"><img src="{% static "img/arreglos/coloresVinos.jpg" %}" alt="Ramo de flores color vino"></a>
+						<h4>Ramo de flores color vino.</h4>
+					{% endif %}
 				</article>
 				<article>
-					<a href="{% url 'pruebas' %}"><img src="{% static "img/arreglos/florPerritoFelizFeliz.jpg" %}" alt="Arreglo de cumpleaños"></a>
-					<h4>Arreglo de cumpleaños.</h4>
+					{% if user.is_authenticated %}
+						<a href="#" data-toggle="modal" data-idArreglo="7" data-precio="250" data-nombreFlor="Arreglo de Cumpleaños" data-target="#modalAgregarCarrito"><img src="{% static "img/arreglos/florPerritoFelizFeliz.jpg" %}" alt="Arreglo de cumpleaños"></a>
+						<h4>Arreglo de cumpleaños.</h4>
+					{% else %}
+						<a href="#" data-toggle="modal" data-target="#modalIniciaSesion"><img src="{% static "img/arreglos/florPerritoFelizFeliz.jpg" %}" alt="Arreglo de cumpleaños"></a>
+						<h4>Arreglo de cumpleaños.</h4>
+					{% endif %}
 				</article>
 				<article>
-					<a href="{% url 'pruebas' %}"><img src="{% static "img/arreglos/margaritasDiadeCampo.jpg" %}" alt="Arreglo de flores margaritas"></a>
-					<h4>Arreglo de flores margaritas.</h4>
+					{% if user.is_authenticated %}
+						<a href="#" data-toggle="modal" data-idArreglo="8" data-precio="600" data-nombreFlor="Arreglo de Flores Margaritas" data-target="#modalAgregarCarrito"><img src="{% static "img/arreglos/margaritasDiadeCampo.jpg" %}" alt="Arreglo de flores margaritas"></a>
+						<h4>Arreglo de flores margaritas.</h4>
+					{% else %}
+						<a href="#" data-toggle="modal" data-target="#modalIniciaSesion"><img src="{% static "img/arreglos/margaritasDiadeCampo.jpg" %}" alt="Arreglo de flores margaritas"></a>
+						<h4>Arreglo de flores margaritas.</h4>
+					{% endif %}
 				</article>
 				<article>
-					<a href="{% url 'pruebas' %}"><img src="{% static "img/arreglos/tulipanesRomance.jpg" %}" alt="Arreglo de tulipanes"></a>
-					<h4>Arreglo de tulipanes.</h4>
+					{% if user.is_authenticated %}
+						<a href="#" data-toggle="modal" data-idArreglo="9" data-precio="720" data-nombreFlor="Arreglo de tulipanes" data-target="#modalAgregarCarrito"><img src="{% static "img/arreglos/tulipanesRomance.jpg" %}" alt="Arreglo de tulipanes"></a>
+						<h4>Arreglo de tulipanes.</h4>
+					{% else %}
+						<a href="#" data-toggle="modal" data-target="#modalIniciaSesion"><img src="{% static "img/arreglos/tulipanesRomance.jpg" %}" alt="Arreglo de tulipanes"></a>
+						<h4>Arreglo de tulipanes.</h4>
+					{% endif %}
 				</article>
 			</div>
 		</section>
@@ -71,4 +91,91 @@
 			<p>Todos los diseños son elaborados en el momento con flores frescas y de la más alta calidad, las variaciones en los diseños son algo inevitable, siendo imposible igualar un diseño al 100% por ser un producto natural. Los arreglos florales pueden variar en forma y diseño, dependiendo de la disponibilidad de flores según temporada o bases según existencias. Sin embargo, en el supuesto caso que su arreglo sea sujeto a sufrir algún cambio que afecte el diseño original solicitado, Florería Chikorita se compromete a hacerlo previa información y autorización del cliente (con conocimiento del mismo). Siendo estas variaciones ligeras , usando flores de valor equivalente, teniendo cuidado de mantener el esquema de estilo, y tema del arreglo, pero sobre todo siempre en beneficio del cliente. Las imágenes mostradas en los accesorios de los productos son puramente de cáracter ilustrativo y pueden variar en cuanto a forma y color.</p>
 			<p class="copy">Florería Chicorita &copy; 2020</p>
 	</footer>
+
+	<!-- Modal Agregar Flores al Carrito-->
+	<div class="modal fade" id="modalAgregarCarrito" tabindex="-1" role="dialog" aria-labelledby="modalAgregarCarrito" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Agregar al carrito</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<form id="formAddCarrito" method="post">
+					<div class="modal-body">
+						{% csrf_token %}
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text">Arreglo: </span>
+							</div>
+							<input type="text" id="nomArregloModl" class="form-control" aria-label="Arreglo" readonly aria-describedby="Arreglo">
+						</div>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text">$</span>
+							</div>
+							<input type="text" id="costoArregloModl" readonly class="form-control" aria-label="costo">
+						</div>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+							<label class="input-group-text" for="cantidad">Cantidad: </label>
+							</div>
+							<select class="custom-select" id="cantidad">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+							</select>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="submit" id="envCarrito" class="btn btn-primary">Save changes</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Porfavor Inicia Sesion-->
+	<div class="modal fade" id="modalIniciaSesion" tabindex="-1" role="dialog" aria-labelledby="modalIniciaSesion" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">POR FAVOR INICIE SESIÓN</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		$('#modalAgregarCarrito').on('show.bs.modal', function (e) {
+			var button = $(e.relatedTarget);
+			var cantidad = 1;
+			var total = $(this).find('.modal-body #costoArregloModl');
+			$(this).find('.modal-body #nomArregloModl').val(button.attr('data-nombreFlor'));
+			total.val(button.data('precio'));
+			$(this).find('.modal-body #cantidad').change(function(){
+				cantidad=$(this).val();
+				if(cantidad==1){
+					total.val(button.data('precio'));
+				}else{
+					var nuevoTotal = cantidad*button.data('precio');
+					total.val(nuevoTotal);
+				}
+			});
+			console.log("Datos del arreglo")
+			console.log("ID: ",button.attr('data-idArreglo'))
+			console.log("Nombre: ",button.attr('data-nombreFlor'))
+			console.log("Precio: ",button.data('precio'))
+
+
+		});
+	</script>
 {%endblock%}
