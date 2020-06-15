@@ -32,7 +32,7 @@
 			<div class="container">
 				<article>
 					{% if user.is_authenticated %}
-						<a href="#" data-toggle="modal" data-idArreglo="6" data-precio="520" data-nombreFlor="Centro de Mesa Vino" data-target="#modalAgregarCarrito"><img src="{% static "img/arreglos/coloresVinos.jpg" %}" alt="Ramo de flores color vino"></a>
+						<a href="#" data-toggle="modal" data-idUsuario="{{user.id}}" data-idArreglo="6" data-precio="520" data-nombreFlor="Centro de Mesa Vino" data-target="#modalAgregarCarrito"><img src="{% static "img/arreglos/coloresVinos.jpg" %}" alt="Ramo de flores color vino"></a>
 						<h4>Ramo de flores color vino.</h4>
 					{% else %}
 						<a href="#" data-toggle="modal" data-target="#modalIniciaSesion"><img src="{% static "img/arreglos/coloresVinos.jpg" %}" alt="Ramo de flores color vino"></a>
@@ -41,7 +41,7 @@
 				</article>
 				<article>
 					{% if user.is_authenticated %}
-						<a href="#" data-toggle="modal" data-idArreglo="7" data-precio="250" data-nombreFlor="Arreglo de Cumpleaños" data-target="#modalAgregarCarrito"><img src="{% static "img/arreglos/florPerritoFelizFeliz.jpg" %}" alt="Arreglo de cumpleaños"></a>
+						<a href="#" data-toggle="modal" data-idUsuario="{{user.id}}" data-idArreglo="7" data-precio="250" data-nombreFlor="Arreglo de Cumpleaños" data-target="#modalAgregarCarrito"><img src="{% static "img/arreglos/florPerritoFelizFeliz.jpg" %}" alt="Arreglo de cumpleaños"></a>
 						<h4>Arreglo de cumpleaños.</h4>
 					{% else %}
 						<a href="#" data-toggle="modal" data-target="#modalIniciaSesion"><img src="{% static "img/arreglos/florPerritoFelizFeliz.jpg" %}" alt="Arreglo de cumpleaños"></a>
@@ -50,7 +50,7 @@
 				</article>
 				<article>
 					{% if user.is_authenticated %}
-						<a href="#" data-toggle="modal" data-idArreglo="8" data-precio="600" data-nombreFlor="Arreglo de Flores Margaritas" data-target="#modalAgregarCarrito"><img src="{% static "img/arreglos/margaritasDiadeCampo.jpg" %}" alt="Arreglo de flores margaritas"></a>
+						<a href="#" data-toggle="modal" data-idUsuario="{{user.id}}" data-idArreglo="8" data-precio="600" data-nombreFlor="Arreglo de Flores Margaritas" data-target="#modalAgregarCarrito"><img src="{% static "img/arreglos/margaritasDiadeCampo.jpg" %}" alt="Arreglo de flores margaritas"></a>
 						<h4>Arreglo de flores margaritas.</h4>
 					{% else %}
 						<a href="#" data-toggle="modal" data-target="#modalIniciaSesion"><img src="{% static "img/arreglos/margaritasDiadeCampo.jpg" %}" alt="Arreglo de flores margaritas"></a>
@@ -59,7 +59,7 @@
 				</article>
 				<article>
 					{% if user.is_authenticated %}
-						<a href="#" data-toggle="modal" data-idArreglo="9" data-precio="720" data-nombreFlor="Arreglo de tulipanes" data-target="#modalAgregarCarrito"><img src="{% static "img/arreglos/tulipanesRomance.jpg" %}" alt="Arreglo de tulipanes"></a>
+						<a href="#" data-toggle="modal" data-idUsuario="{{user.id}}" data-idArreglo="9" data-precio="720" data-nombreFlor="Arreglo de tulipanes" data-target="#modalAgregarCarrito"><img src="{% static "img/arreglos/tulipanesRomance.jpg" %}" alt="Arreglo de tulipanes"></a>
 						<h4>Arreglo de tulipanes.</h4>
 					{% else %}
 						<a href="#" data-toggle="modal" data-target="#modalIniciaSesion"><img src="{% static "img/arreglos/tulipanesRomance.jpg" %}" alt="Arreglo de tulipanes"></a>
@@ -102,26 +102,28 @@
 					<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<form id="formAddCarrito" method="post">
+				<form id="formAddCarrito" method="post" action="{% url 'agregarCarrito' %}">
 					<div class="modal-body">
 						{% csrf_token %}
+						<input type="hidden" id="idUsuario" name="idUsuario">
+						<input type="hidden" id="idArregloModl" name="idArregloModl">
 						<div class="input-group mb-3">
 							<div class="input-group-prepend">
 								<span class="input-group-text">Arreglo: </span>
 							</div>
-							<input type="text" id="nomArregloModl" class="form-control" aria-label="Arreglo" readonly aria-describedby="Arreglo">
+							<input type="text" id="nomArregloModl" name="nomArregloModl" class="form-control" aria-label="Arreglo" readonly aria-describedby="Arreglo">
 						</div>
 						<div class="input-group mb-3">
 							<div class="input-group-prepend">
 								<span class="input-group-text">$</span>
 							</div>
-							<input type="text" id="costoArregloModl" readonly class="form-control" aria-label="costo">
+							<input type="text" id="costoArregloModl" name="costoArregloModl" readonly class="form-control" aria-label="costo">
 						</div>
 						<div class="input-group mb-3">
 							<div class="input-group-prepend">
 							<label class="input-group-text" for="cantidad">Cantidad: </label>
 							</div>
-							<select class="custom-select" id="cantidad">
+							<select class="custom-select" id="cantidad" name="cantidad">
 								<option value="1">1</option>
 								<option value="2">2</option>
 								<option value="3">3</option>
@@ -161,6 +163,8 @@
 			var total = $(this).find('.modal-body #costoArregloModl');
 			$(this).find('.modal-body #nomArregloModl').val(button.attr('data-nombreFlor'));
 			total.val(button.data('precio'));
+			$(this).find('.modal-body #idArregloModl').val(button.attr('data-idArreglo'));
+			$(this).find('.modal-body #idUsuario').val(button.attr('data-idUsuario'))
 			$(this).find('.modal-body #cantidad').change(function(){
 				cantidad=$(this).val();
 				if(cantidad==1){
@@ -171,7 +175,8 @@
 				}
 			});
 			console.log("Datos del arreglo")
-			console.log("ID: ",button.attr('data-idArreglo'))
+			console.log("ID usuario: ",button.attr('data-idUsuario'))
+			console.log("ID Arreglo: ",button.attr('data-idArreglo'))
 			console.log("Nombre: ",button.attr('data-nombreFlor'))
 			console.log("Precio: ",button.data('precio'))
 

@@ -20,6 +20,9 @@ class Compra(models.Model):
 	user = models.ForeignKey(User,on_delete=models.CASCADE,blank=False, null=False)
 	producto = models.ForeignKey(Inventario,on_delete=models.CASCADE,blank=False, null=False)
 	fecha = models.DateField(default=datetime.now)
+	cantidad = models.IntegerField(null=True, blank=True)
+	precio = models.IntegerField(null=True, blank=True)
+	esta_en_carro = models.BooleanField(default=True,blank=True, null=True)
 	def __str__(self):
 		return self.user.username + " - " + self.producto.nombre
 

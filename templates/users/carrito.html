@@ -1,0 +1,112 @@
+{%extends "base.html"%}
+{% load static %}
+
+{%block contenido-head%}
+
+{%endblock%}
+
+{%block contenido-body%}
+	<div class="container text-center" style="margin-top: 80px;">
+		{% if messages %}
+			<ul class="messages">
+				{% for message in messages %}
+					<li{% if message.tags %} class="{{ message.tags }} alert-success"{% endif %} style="list-style-type: none;">{{ message }}</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+		<h1 style="float:none;">Carrito de Compras de: {{user.username}}</h1>
+		<table id="tablaCarrito" class="table">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Arreglo</th>
+					<th scope="col">Cantidad</th>
+					<th scope="col">Precio</th>
+				</tr>
+			</thead>
+			<tbody>
+				<form id="formConfirmarCarro" method="post" action="{% url 'carrito' %}">
+					{% csrf_token %}
+					<input type="hidden" id="userId" name="userId" value="{{user.id}}">
+					<input type="hidden" id="opcSelec" name="opcSelec">
+				</form>
+				{% for item in carrito %}
+					<tr>
+						<th scope="row">{{item.id}}</th>
+						<td>{{item.producto}}</td>
+						<td>{{item.cantidad}}</td>
+						<td class="precio">{{item.precio}}</td>
+					</tr>
+				{% endfor %}
+					<tr>
+						<th></th>
+						<td></td>
+						<td scope="col">Total</td>
+						<td id="TotalCarrito"></td>
+					</tr>
+					<tr>
+						<th></th>
+						<td></td>
+						<td></td>
+						<td>
+							<button type="button" data-tipoboton="comprar" class="btn btn-primary" data-toggle="modal" data-target="#modalCompra">Comprar</button>
+							<button type="button" data-tipoboton="cancelar" class="btn btn-danger" data-toggle="modal" data-target="#modalCompra">Cancelar</button>
+						</td>
+					</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!-- Modal Compra-->
+	<div class="modal fade" id="modalCompra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modalCompraTitle"></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label class="form-control" id="modalCompraBody"></label>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-primary" id="aceptarCompraModal">Aceptar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		$(function(){
+			var total = 0;
+			$('#tablaCarrito tr td').each(function() {
+				if($(this).hasClass('precio')){
+					total=Number(total)+Number($(this).html());
+				}
+			});
+			$('#TotalCarrito').html(total);
+		});
+
+		$('#modalCompra').on('show.bs.modal',function(event){
+			var boton = $(event.relatedTarget);
+			var modal = $(this);
+			if(boton.data('tipoboton')=="comprar"){
+				modal.find('.modal-title').text('Confirmar');
+				modal.find('.modal-body #modalCompraBody').text('¿Estas seguro que deseas comprar los articulos anteriores?');
+				$('#opcSelec').val('comprar');
+			}else{
+				modal.find('.modal-title').text('Cancelar Carrito');
+				modal.find('.modal-body #modalCompraBody').text('¿Estas seguro que vaciar tu carrito?');
+				$('#opcSelec').val('cancelar');
+			}
+		});
+
+		$('#aceptarCompraModal').click(function(){
+			$('#formConfirmarCarro').submit();
+		});
+	</script>
+{% endblock %}

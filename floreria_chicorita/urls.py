@@ -23,4 +23,5 @@ urlpatterns = [
 	path('pruebas/', pruebas,name="pruebas"),
     path('admin/', admin.site.urls),
     path('', include("users.urls")),
+    path('agregarCarrito/', agregarCarrito, name="agregarCarrito"),
 ]
