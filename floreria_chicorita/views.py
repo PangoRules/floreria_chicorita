@@ -1,6 +1,7 @@
 from django.views.generic import ListView
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib import messages
 from users.models import *
 from floreria_chicorita.forms import *
 from django.contrib.auth.models import User
@@ -27,7 +28,10 @@ def agregarCarrito(request):
 			compra.cantidad=cantidad;
 			compra.precio=precio;
 			compra.save()
+			messages.success(request,'Se ha agregado el arrego: '+arreglo.nombre+' a su carrito de compras')
+			return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 	return render(request,"welcome.html")
 
-def verflores(request):
-	return render(request,"verflores.html")
+def verFlores(request):
+	flores = Inventario.objects.all()
+	return render(request,"verflores.html",{'flores':flores})

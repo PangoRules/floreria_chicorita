@@ -6,7 +6,101 @@
 {%endblock%}
 
 {%block contenido-body%}
-	<div class="container-fluid mt-5">
-		<img src="{% static "img/LogoChicorita.png" %}" alt="">
+	<div class="container" style="margin-top: 80px;">
+		{% if messages %}
+			<ul class="messages">
+				{% for message in messages %}
+					<li{% if message.tags %} class="{{ message.tags }} alert-success"{% endif %} style="list-style-type: none;">{{ message }}</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+		<div class="row justify-content-center">
+			<h1>CATALAGO DE FLORES</h1>
+		</div>
+		<div class="row mt-5">
+			{% for flor in flores %}
+				<div class="col-sm-6 col-md-4 col-lg-3" style="width:49%">
+					<div class="card mb-4" style="width: 18rem;">
+						<img src="{% static 'img/arreglos/' %}{{flor.flor_pic}}" class="card-img-top" alt="{{flor.nombre}}" style="height: 20rem;">
+						<div class="card-body">
+							<h5 class="card-title">{{flor.nombre}}</h5>
+							<p class="card-text text-justify">{{flor.descripcion}}</p>
+							<a href="#" data-toggle="modal" data-target="#modalAgregarCarrito" class="btn btn-primary" data-idUsuario="{{user.id}}" data-idArreglo="{{flor.id}}" data-precio="{{flor.precio}}" data-nombreFlor="{{flor.nombre}}">Agregar al carro</a>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
 	</div>
+
+	<!-- Modal Agregar Flores al Carrito-->
+	<div class="modal fade" id="modalAgregarCarrito" tabindex="-1" role="dialog" aria-labelledby="modalAgregarCarrito" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Agregar al carrito</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<form id="formAddCarrito" method="post" action="{% url 'agregarCarrito' %}">
+					<div class="modal-body">
+						{% csrf_token %}
+						<input type="hidden" id="idUsuario" name="idUsuario">
+						<input type="hidden" id="idArregloModl" name="idArregloModl">
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text">Arreglo: </span>
+							</div>
+							<input type="text" id="nomArregloModl" name="nomArregloModl" class="form-control" aria-label="Arreglo" readonly aria-describedby="Arreglo">
+						</div>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text">$</span>
+							</div>
+							<input type="text" id="costoArregloModl" name="costoArregloModl" readonly class="form-control" aria-label="costo">
+						</div>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+							<label class="input-group-text" for="cantidad">Cantidad: </label>
+							</div>
+							<select class="custom-select" id="cantidad" name="cantidad">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+							</select>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+						<button type="submit" id="envCarrito" class="btn btn-primary">Agregar</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		$('#modalAgregarCarrito').on('show.bs.modal', function (e) {
+			var button = $(e.relatedTarget);
+			var cantidad = 1;
+			var total = $(this).find('.modal-body #costoArregloModl');
+			$(this).find('.modal-body #nomArregloModl').val(button.attr('data-nombreFlor'));
+			total.val(button.data('precio'));
+			$(this).find('.modal-body #idArregloModl').val(button.attr('data-idArreglo'));
+			$(this).find('.modal-body #idUsuario').val(button.attr('data-idUsuario'))
+			$(this).find('.modal-body #cantidad').change(function(){
+				cantidad=$(this).val();
+				if(cantidad==1){
+					total.val(button.data('precio'));
+				}else{
+					var nuevoTotal = cantidad*button.data('precio');
+					total.val(nuevoTotal);
+				}
+			});
+		});
+	</script>
 {%endblock%}
